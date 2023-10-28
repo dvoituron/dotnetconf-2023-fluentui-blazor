@@ -23,3 +23,24 @@ h1:focus {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+/* Demo Styles */
+body {
+    margin: 0px;
+    height: 100vh;
+}
+
+.footer {
+    background-color: var(--neutral-layer-4);
+    padding: 4px 0px;
+    text-align: center;
+}
+
+.fluent-nav-menu {
+    background-color: var(--neutral-layer-1);
+    height: 100%;
+}
+
+.main-content {
+    height: 100%;
+}

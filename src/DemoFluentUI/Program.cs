@@ -1,10 +1,18 @@
 using DemoFluentUI.Components;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add FluentUI
+builder.Services.AddHttpClient();
+builder.Services.AddFluentUIComponents(options =>
+{
+    options.HostingModel = BlazorHostingModel.Hybrid;
+});
 
 var app = builder.Build();
 
