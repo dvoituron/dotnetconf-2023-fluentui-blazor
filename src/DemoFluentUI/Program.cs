@@ -1,4 +1,4 @@
-using Demo_FluentUI.Components;
+using DemoFluentUI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
