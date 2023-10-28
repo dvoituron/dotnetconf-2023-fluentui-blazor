@@ -1,0 +1,62 @@
+﻿@page "/weather"
+
+<PageTitle>Weather</PageTitle>
+
+<FluentLabel Typo="Typography.PageTitle">Weather</FluentLabel>
+
+<FluentLabel>This component demonstrates showing data.</FluentLabel>
+
+@if (GridItems == null)
+{
+    <FluentProgressRing>Loading...</FluentProgressRing>
+}
+else
+{
+    <FluentDataGrid Items="@GridItems" ResizableColumns="true">
+        <PropertyColumn Title="Date" Property="@(c => c.Date.ToShortDateString())" Sortable="true" />
+        <PropertyColumn Title="Temp. (C)" Property="@(c => c.TemperatureC)" Sortable="true" />
+        <PropertyColumn Title="Temp. (F)" Property="@(c => c.TemperatureF)" Sortable="true" />
+        <TemplateColumn Title="Icon">
+            @if (context.TemperatureC > 21)
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.WeatherHailNight())" Color="@Color.Neutral" />
+            }
+            else
+            {
+                <FluentIcon Value="@(new Icons.Regular.Size24.TimeAndWeather())" Color="@Color.Neutral" />
+            }
+        </TemplateColumn>
+        <PropertyColumn Title="Summary" Property="@(c => c.Summary)" Sortable="true" />
+    </FluentDataGrid>
+}
+
+@code {
+    private IQueryable<WeatherForecast>? GridItems;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var Summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+        GridItems = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now).AddDays(index),
+                TemperatureC = index * 2 + 17,
+                Summary = Summaries[index],
+            }).AsQueryable();
+
+        StateHasChanged();
+    }
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}
