@@ -1,0 +1,66 @@
+﻿@page "/register"
+
+<PageTitle>New user</PageTitle>
+
+<FluentLabel Typo="Typography.PageTitle">Register</FluentLabel>
+
+<FluentCard Style="margin: 16px 0px; padding: 16px; width: 600px; height: 500px;">
+
+    <FluentLabel Style="margin-bottom: 24px;">
+        Let's get you all set up so you can verify your personal account and begin
+        setting up your profile.
+    </FluentLabel>
+
+    <EditForm Model="@Data" OnValidSubmit="ValidHandlerAsync">
+        <FluentTextField Label="First name: *"
+                         Placeholder="Enter your first name"
+                         Required
+                         @bind-Value="@Data.FistName" />
+         <FluentTextField Label="Last name:"
+                          Placeholder="Enter your last name"
+                          @bind-Value="@Data.LastName" />
+         <FluentDatePicker Label="Birth date:"
+                           @bind-Value="@Data.BirthDate" />
+         <FluentTextField Label="EMail: *"
+                          TextFieldType="TextFieldType.Email"
+                          Required
+                          Placeholder="Enter your email"
+                          @bind-Value="@Data.Email" />
+
+         <FluentCheckbox Label="I agree to all terms, conditions, privacy policy."
+                         @bind-Value="@AcceptToCreate" />
+
+         <div style="margin: 24px 0px;" />
+
+         <FluentButton Appearance="Appearance.Accent"
+                       Loading="@Loading"
+                       Disabled="@(!AcceptToCreate)"
+                       Type="ButtonType.Submit">
+             Create account
+         </FluentButton>
+     </EditForm>
+ </FluentCard>
+
+ @code {
+    private RegisterUser Data = new();
+    private bool AcceptToCreate = false;
+    private bool Loading = false;
+
+    private async Task ValidHandlerAsync()
+    {
+        Loading = true;
+
+        // Simulate asynchronous loading
+        await Task.Delay(1000);
+
+        Loading = false;
+    }
+
+    public class RegisterUser
+    {
+        public string? LastName { get; set; }
+        public string? FistName { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string? Email { get; set; }
+    }
+}

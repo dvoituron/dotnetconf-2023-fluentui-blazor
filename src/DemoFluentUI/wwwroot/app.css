@@ -43,4 +43,11 @@ body {
 
 .main-content {
     height: 100%;
+    width: 100%;
+    padding: 0px 16px;
+}
+
+fluent-text-field {
+    min-width: 100%;
+    margin-bottom: 16px;
 }
