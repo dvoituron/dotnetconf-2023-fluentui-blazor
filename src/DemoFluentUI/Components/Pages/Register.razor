@@ -4,7 +4,7 @@
 
 <FluentLabel Typo="Typography.PageTitle">Register</FluentLabel>
 
-<FluentCard Style="margin: 16px 0px; padding: 16px; width: 600px; height: 500px;">
+<FluentCard Style="margin: 16px 0px; padding: 16px; width: 600px; height: 700px;">
 
     <FluentLabel Style="margin-bottom: 24px;">
         Let's get you all set up so you can verify your personal account and begin
@@ -21,6 +21,27 @@
                           @bind-Value="@Data.LastName" />
          <FluentDatePicker Label="Birth date:"
                            @bind-Value="@Data.BirthDate" />
+
+         @* Country *@
+         <FluentAutocomplete TOption="Country"
+                             Label="Select a country"
+                             Width="250px"
+                             Placeholder="Select countries"
+                             OnOptionsSearch="@OnSearchAsync"
+                             MaximumSelectedOptions="1"
+                             OptionText="@(i => i.Name)"
+                             @bind-SelectedOptions="@Data.Languages">
+
+            <OptionTemplate Context="language">
+                @language.HtmlFlagAndName
+            </OptionTemplate>
+
+            <MaximumSelectedOptionsMessage>
+                Please select only one country.
+            </MaximumSelectedOptionsMessage>
+
+         </FluentAutocomplete>
+
          <FluentTextField Label="EMail: *"
                           TextFieldType="TextFieldType.Email"
                           Required
@@ -56,11 +77,20 @@
         Loading = false;
     }
 
+    private async Task OnSearchAsync(OptionsSearchEventArgs<Country> e)
+    {
+        e.Items = Country.All.Where(i => i.Name.StartsWith(e.Text, StringComparison.OrdinalIgnoreCase))
+                              .OrderBy(i => i.Name);
+
+        await Task.CompletedTask;
+    }
+
     public class RegisterUser
     {
         public string? LastName { get; set; }
         public string? FistName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Email { get; set; }
+        public IEnumerable<Country> Languages { get; set; } = Array.Empty<Country>();
     }
 }
