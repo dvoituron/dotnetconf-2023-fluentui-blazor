@@ -1,7 +1,54 @@
 ﻿@page "/"
+@using Microsoft.FluentUI.AspNetCore.Components.DesignTokens
+@inject BaseLayerLuminance BaseLayerLuminance
+@inject AccentBaseColor AccentBaseColor
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<FluentStack Orientation="Orientation.Vertical" Style="margin-top: 32px;">
+    <FluentLabel Typo="Typography.PageTitle">Settings</FluentLabel>
+
+    <FluentSelect Label="Color"
+                  Items=@(Enum.GetValues<OfficeColor>())
+                  Height="200px"
+                  @bind-SelectedOption="@Color" />
+
+    <FluentSwitch Label="Theme"
+                  Style="margin-top: 16px;"
+                  UncheckedMessage="Light"
+                  CheckedMessage="Dark"
+                  @bind-Value="@IsDark" />
+</FluentStack>
+
+@code {
+    private OfficeColor _color = OfficeColor.Default;
+    private bool _isDark = false;
+
+    public OfficeColor Color
+    {
+        get => _color;
+        set
+        {
+            _color = value;
+
+            var colorHex = _color.ToAttributeValue() ?? "default";
+            AccentBaseColor.WithDefault(colorHex.ToSwatch());
+        }
+    }
+
+    public bool IsDark
+    {
+        get => _isDark;
+        set
+        {
+            _isDark = value;
+
+            var luminance = _isDark ? StandardLuminance.DarkMode : StandardLuminance.LightMode;
+            BaseLayerLuminance.WithDefault(luminance.GetLuminanceValue());
+        }
+    }
+}
