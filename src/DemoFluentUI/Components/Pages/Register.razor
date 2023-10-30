@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@inject IDialogService DialogService
 
 <PageTitle>New user</PageTitle>
 
@@ -53,12 +54,13 @@
 
          <div style="margin: 24px 0px;" />
 
-         <FluentButton Appearance="Appearance.Accent"
-                       Loading="@Loading"
-                       Disabled="@(!AcceptToCreate)"
-                       Type="ButtonType.Submit">
-             Create account
-         </FluentButton>
+        <FluentButton Appearance="Appearance.Accent"
+                    Loading="@Loading"
+                    IconStart="@(new Icons.Regular.Size20.PersonAdd())"
+                    Disabled="@(!AcceptToCreate)"
+                    Type="ButtonType.Submit">
+            Create account
+        </FluentButton>
      </EditForm>
  </FluentCard>
 
@@ -73,6 +75,15 @@
 
         // Simulate asynchronous loading
         await Task.Delay(1000);
+
+        // Confirmation
+        // await DialogService.ShowInfoAsync(message: "Your account has been successfully created",
+        //                                   title: "New user");
+
+        await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
+        {
+            Title = "New user",
+        });
 
         Loading = false;
     }

@@ -1,0 +1,44 @@
+﻿@implements IDialogContentComponent
+
+@* Header *@
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.PersonAdd())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            @Dialog.Instance.Parameters.Title
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+@* Footer *@
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Accent"
+                  OnClick="@SaveAsync">
+        Close
+    </FluentButton>
+</FluentDialogFooter>
+
+@* Body *@
+<FluentDialogBody>
+    <FluentLabel Typo="Typography.Subject" MarginBlock="10px;">
+        Thanks for being awesome!
+    </FluentLabel>
+    <FluentLabel>
+        Thank you for registering your new request.
+        If your request is urgent, please use our telephone number to speak to one
+        of our customer service representatives.
+        You can also reach us via <a href="https://dotnet.microsoft.com" target="_blank">
+            our documentation page
+        </a>.
+    </FluentLabel>
+</FluentDialogBody>
+
+@code {
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private async Task SaveAsync()
+    {
+        await Dialog.CloseAsync();
+    }
+}
