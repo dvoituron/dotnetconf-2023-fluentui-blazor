@@ -10,7 +10,7 @@ This project demonstrates how to use the [Fluent UI Blazor Library](https://www.
 > This project presents only a small part of the possibilities offered by **Fluent UI Blazor library**.
 > Some shortcuts have been applied to improve understanding of the project.
 
-## After completing all the steps, the final result will be
+## After completing all the steps, the final result will look like this:
 
 ![Final result](doc/final.gif)
 
@@ -39,10 +39,7 @@ To use **Fluent UI** in your Blazor applications, you must:
     ```csharp
     // Add FluentUI
     builder.Services.AddHttpClient();
-    builder.Services.AddFluentUIComponents(options =>
-    {
-    options.HostingModel = BlazorHostingModel.Hybrid;
-    });
+    builder.Services.AddFluentUIComponents();
     ```
 
 - In the **MainLayout.razor** file, include this code to define a header, a menu, a body and a footer.
