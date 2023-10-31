@@ -30,7 +30,7 @@ To use **Fluent UI** in your Blazor applications, you must:
     - [Microsoft.FluentUI.AspNetCore.Components.Icons](https://www.nuget.org/packages/Microsoft.FluentUI.AspNetCore.Components.Icons)
 
 ## 2. Include a Navigation Menu
-<a name="step2" />
+<a name="step2"></a>
 
 - Add this namespace to the **_import.razor** file.
     ```csharp
