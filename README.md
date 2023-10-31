@@ -10,6 +10,12 @@ This project demonstrates how to use the [Fluent UI Blazor Library](https://www.
 > This project presents only a small part of the possibilities offered by **Fluent UI Blazor library**.
 > Some shortcuts have been applied to improve understanding of the project/code.
 
+## Agenda
+
+|Step|Branch|
+|---|---|
+|[1. Installation](#step1)|[branch](/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/01-with-nugets)|
+
 ## After completing all the steps, the final result will look like this:
 
 ![Final result](doc/final.gif)
@@ -17,6 +23,8 @@ This project demonstrates how to use the [Fluent UI Blazor Library](https://www.
 To use **Fluent UI** in your Blazor applications, you must:
 
 ## 1. Installation
+<a name="step1"></a>
+
 - Create a new .NET8 Blazor Web App.
 
 - On the **Additional information** screen,
@@ -111,6 +119,8 @@ To use **Fluent UI** in your Blazor applications, you must:
   ![Setup Project](doc/step2.png)
 
 ## 3. Add Icons and Emoji
+<a name="step3"></a>
+
 - Use these pagesin the demo site to find **Icons** and **Emoji** (we're not using emoji in this project).
     - https://www.fluentui-blazor.net/Icon
     - https://www.fluentui-blazor.net/Emoji
@@ -131,6 +141,7 @@ To use **Fluent UI** in your Blazor applications, you must:
     ```
 
 ## 4. Add the Counter page
+<a name="step4"></a>
 
 - Go to the **Button** and **Label** pages to display the available styles.
     - https://www.fluentui-blazor.net/Button 
@@ -161,6 +172,7 @@ To use **Fluent UI** in your Blazor applications, you must:
     ```
 
 ## 5. Add a Weather page
+<a name="step5"></a>
 
 - Open these pages to display the available styles, for **ProgressBar** and **ProgressRing**.
     - https://www.fluentui-blazor.net/Progress 
@@ -261,6 +273,7 @@ To use **Fluent UI** in your Blazor applications, you must:
   ![Setup Project](doc/step5.png)
 
 ## 6. Add a Registration page
+<a name="step6"></a>
 
 - Add a new **Register.razor** page with this content.
 
@@ -359,7 +372,8 @@ To use **Fluent UI** in your Blazor applications, you must:
 
   ![Setup Project](doc/step6.gif)
 
-# 7. Add an Autocomplete with countries
+## 7. Add an Autocomplete with countries
+<a name="step7"></a>
 
 - Add this class **Country.cs** to have a list of all countries.
 
@@ -460,7 +474,8 @@ To use **Fluent UI** in your Blazor applications, you must:
     }
     ```
 
-# 8. Add Themes: Colors, Dark and Light
+## 8. Add Themes: Colors, Dark and Light
+<a name="step8"></a>
 
 - Open the file **Home.razor** and inject these two services.
 
@@ -531,7 +546,8 @@ To use **Fluent UI** in your Blazor applications, you must:
 
   ![Setup Project](doc/step8.gif)
 
-# 9. Add a confirmation Dialog
+## 9. Add a confirmation Dialog
+<a name="step9"></a>
 
 - Update the **Registry.razor** page to include an **IconStart** to the **Create account** button.
 
@@ -632,7 +648,8 @@ To use **Fluent UI** in your Blazor applications, you must:
     });
     ```
 
-# 10. Replace by a Toast message
+## 10. Replace by a Toast message
+<a name="step10"></a>
 
 - At the end of the MainLayout.razor file, add this line.
     ```xml
