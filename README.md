@@ -108,6 +108,7 @@ To use **FLuentUI** in your Blazor applications, you must:
     ```
 
 - The result will be
+
   ![Setup Project](doc/step2.png)
 
 ## 3. Add Icons and Emoji
@@ -257,6 +258,7 @@ To use **FLuentUI** in your Blazor applications, you must:
     ```
 
 - The result will be
+
   ![Setup Project](doc/step5.png)
 
 ## 6. Add a Registration page
@@ -355,6 +357,7 @@ To use **FLuentUI** in your Blazor applications, you must:
     ```
 
 - The result will be
+
   ![Setup Project](doc/step6.gif)
 
 # 7. Add an Autocomplete with countries
@@ -526,6 +529,7 @@ To use **FLuentUI** in your Blazor applications, you must:
     ```
 
 - The result will be
+
   ![Setup Project](doc/step8.gif)
 
 # 9. Add a confirmation Dialog
@@ -680,3 +684,5 @@ To use **FLuentUI** in your Blazor applications, you must:
         Loading = false;
     }
     ```
+
+![Final result](doc/final.gif)
