@@ -10,6 +10,12 @@ This project demonstrates how to use the [FluentUI Blazor Library](https://www.f
 > This project presents only a small part of the possibilities offered by **FluentUI Blazor Lib**.
 > Some shortcuts have been applied to improve understanding of the project.
 
+## Table of content
+
+|Steps|Documentation|Branch|
+|---|---|---|
+|
+
 ## The final result will be
 
 ![Final result](doc/final.gif)
@@ -17,6 +23,8 @@ This project demonstrates how to use the [FluentUI Blazor Library](https://www.f
 To use **FLuentUI** in your Blazor applications, you must:
 
 ## 1. Installation
+<a name="step1" />
+
 - Create a new .NET8 Blazor Web App.
 
 - On the **Additional information** screen,
@@ -30,6 +38,8 @@ To use **FLuentUI** in your Blazor applications, you must:
     - [Microsoft.FluentUI.AspNetCore.Components.Icons](https://www.nuget.org/packages/Microsoft.FluentUI.AspNetCore.Components.Icons)
 
 ## 2. Include a Navigation Menu
+<a name="step2" />
+
 - Add this namespace to the **_import.razor** file.
     ```csharp
     @using Microsoft.FluentUI.AspNetCore.Components
@@ -112,6 +122,8 @@ To use **FLuentUI** in your Blazor applications, you must:
   ![Setup Project](doc/step2.png)
 
 ## 3. Add Icons and Emoji
+<a name="step3" />
+
 - Use these site to find **Icons** and **Emoji**.
     - https://www.fluentui-blazor.net/Icon
     - https://www.fluentui-blazor.net/Emoji
