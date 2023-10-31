@@ -8,7 +8,7 @@ This project demonstrates how to use the [Fluent UI Blazor Library](https://www.
 > **note**: This code is for step-by-step learning only.
 > It does not respect development rules and/or best practices.
 > This project presents only a small part of the possibilities offered by **Fluent UI Blazor library**.
-> Some shortcuts have been applied to improve understanding of the project.
+> Some shortcuts have been applied to improve understanding of the project/code.
 
 ## After completing all the steps, the final result will look like this:
 
