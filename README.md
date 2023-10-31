@@ -1,26 +1,26 @@
-# DotNetConf 2023 - FluentUI Blazor - Quick Start
+# DotNetConf 2023 - Fluent UI Blazor - Quick Start
 
 
-Demo used during the .NET Conf 2023: Unlocking the power of the Fluent UI Blazor components
+Demo used in the "Unlocking the power of the Fluent UI Blazor components" session at .NET Conf 2023
 
-This project demonstrates how to use the [FluentUI Blazor Library](https://www.fluentui-blazor.net/).
+This project demonstrates how to use the [Fluent UI Blazor Library](https://www.fluentui-blazor.net/).
 
 > **note**: This code is for step-by-step learning only.
-> It does not respect development rules and best practices.
-> This project presents only a small part of the possibilities offered by **FluentUI Blazor Lib**.
+> It does not respect development rules and/or best practices.
+> This project presents only a small part of the possibilities offered by **Fluent UI Blazor library**.
 > Some shortcuts have been applied to improve understanding of the project.
 
-## The final result will be
+## After completing all the steps, the final result will be
 
 ![Final result](doc/final.gif)
 
-To use **FLuentUI** in your Blazor applications, you must:
+To use **Fluent UI** in your Blazor applications, you must:
 
 ## 1. Installation
 - Create a new .NET8 Blazor Web App.
 
 - On the **Additional information** screen,
-  set **"Interactivity type"** to **Global** and uncheck **Include sample page**.
+  set **"Interactivity type"** to **Global** and uncheck **Include sample pages**.
 
   ![Setup Project](doc/step1.png)
 
@@ -112,7 +112,7 @@ To use **FLuentUI** in your Blazor applications, you must:
   ![Setup Project](doc/step2.png)
 
 ## 3. Add Icons and Emoji
-- Use these site to find **Icons** and **Emoji**.
+- Use these pagesin the demo site to find **Icons** and **Emoji** (we're not using emoji in this project).
     - https://www.fluentui-blazor.net/Icon
     - https://www.fluentui-blazor.net/Emoji
 
