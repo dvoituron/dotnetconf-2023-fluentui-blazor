@@ -14,7 +14,16 @@ This project demonstrates how to use the [Fluent UI Blazor Library](https://www.
 
 |Step|Branch|
 |---|---|
-|[1. Installation](#step1)|[branch](/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/01-with-nugets)|
+|[1. Installation](#step1)|[branch 1](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/01-with-nugets)|
+|[2. Include a Navigation Menu](#step2)|[branch 2](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/02-layout-with-navmenu)|
+|[3. Add Icons and Emoji](#step3)|[branch 3](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/03-with-icons)|
+|[4. Add the Counter page](#step4)|[branch 4](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/04-page-counter)|
+|[5. Add a Weather page](#step5)|[branch 5](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/05-page-weather)|
+|[6. Add a Registration page](#step6)|[branch 6](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/06-register-with-inputs)|
+|[7. Add an Autocomplete with countries](#step7)|[branch 7](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/07-with-autocomplete-country)|
+|[8. Add Themes: Colors, Dark and Light](#step8)|[branch 8](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/08-with-theme)|
+|[9. Add a confirmation Dialog](#step9)|[branch 9](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/09-with-dialog)|
+|[10. Replace by a Toast message](#step10)|[branch 10](https://github.com/dvoituron/dotnetconf-2023-fluentui-blazor/tree/steps/10-with-toast)|
 
 ## After completing all the steps, the final result will look like this:
 
