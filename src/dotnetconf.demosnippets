@@ -1,0 +1,753 @@
+# DotNetConf 2023 - https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.DemoSnippets
+
+TAB: 02-NavMenu
+
+- _import.razor
+
+@using Microsoft.FluentUI.AspNetCore.Components
+
+- Program.cs
+
+// Add FluentUI
+builder.Services.AddHttpClient();
+builder.Services.AddFluentUIComponents();
+
+- MainLayout.razor
+
+<FluentLayout>
+    @* Header *@
+    <FluentHeader>
+        .NET Conf 2023
+    </FluentHeader>
+
+    <FluentBodyContent>
+        <FluentStack Orientation="Orientation.Horizontal" Style="height: 100%;">
+
+            @* Left Menu *@
+            <FluentNavMenu Width="250" Title="Navigation menu">
+                <FluentNavLink Href="/"
+                               Match="NavLinkMatch.All">Home</FluentNavLink>
+                <FluentNavLink Href="/Counter">Counter</FluentNavLink>
+                <FluentNavLink Href="/Weather">Weather</FluentNavLink>
+            </FluentNavMenu>
+
+            @* Content *@
+            <div class="main-content">
+                @Body
+            </div>
+
+        </FluentStack>
+
+    </FluentBodyContent>
+
+    @* Footer *@
+    <FluentFooter>
+        Microsoft 2023
+    </FluentFooter>
+
+</FluentLayout>
+
+- App.css
+
+/* Demo Styles */
+body {
+    margin: 0px;
+    height: 100vh;
+}
+
+.footer {
+    background-color: var(--neutral-layer-4);
+    padding: 4px 0px;
+    text-align: center;
+}
+
+.fluent-nav-menu {
+    background-color: var(--neutral-layer-1);
+    height: 100%;
+}
+
+.main-content {
+    height: 100%;
+    width: 100%;
+    padding: 0px 16px;
+}
+
+TAB: 03-Icons
+
+- MainLayout.razor
+
+<FluentNavMenu Width="250" Title="Navigation menu">
+    <FluentNavLink Icon="@(new Icons.Regular.Size20.Home())"
+                   Href="/" Match="NavLinkMatch.All">Home</FluentNavLink>
+    <FluentNavLink Icon="@(new Icons.Regular.Size20.AddSquare())" 
+                   Href="/Counter">Counter</FluentNavLink>
+    <FluentNavLink Icon="@(new Icons.Regular.Size20.WeatherRainShowersDay())" 
+                   Href="/Weather">Weather</FluentNavLink>
+</FluentNavMenu>
+
+TAB: 04-Counter page
+
+- Counter.razor
+
+@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<FluentLabel Typo="Typography.PageTitle">Counter</FluentLabel>
+<FluentLabel role="status">Current count: @currentCount</FluentLabel>
+<FluentButton Appearance="Appearance.Accent"
+              OnClick="IncrementCount">
+    Click me
+</FluentButton>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+
+TAB: 05-Weather page
+
+- Weather.razor
+
+@page "/weather"
+
+<PageTitle>Weather</PageTitle>
+
+<FluentLabel Typo="Typography.PageTitle">Weather</FluentLabel>
+<FluentLabel>This component demonstrates showing data.</FluentLabel>
+
+@if (GridItems == null)
+{
+    <FluentProgressRing>Loading...</FluentProgressRing>
+}
+else
+{
+    <FluentDataGrid Items="@GridItems" ResizableColumns="true">
+        <PropertyColumn Title="Date" Property="@(c => c.Date.ToShortDateString())" 
+                        Sortable="true" />
+        <PropertyColumn Title="Temp. (C)" Property="@(c => c.TemperatureC)" 
+                        Sortable="true" />
+        <PropertyColumn Title="Temp. (F)" Property="@(c => c.TemperatureF)" 
+                        Sortable="true" />
+        <PropertyColumn Title="Summary" Property="@(c => c.Summary)" Sortable="true" />
+    </FluentDataGrid>
+}
+
+@code {
+    private IQueryable<WeatherForecast>? GridItems;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var Summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+                                "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+
+        GridItems = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now).AddDays(index),
+                TemperatureC = index * 2 + 17,
+                Summary = Summaries[index],
+            }).AsQueryable();
+
+        StateHasChanged();
+    }
+
+
+
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}
+
+- Weather.razor: TemplateColumn
+
+    <TemplateColumn Title="Icon">
+        @if (context.TemperatureC > 21)
+        {
+            <FluentIcon Value="@(new Icons.Regular.Size24.WeatherHailNight())" 
+                        Color="@Color.Neutral" />
+        }
+        else
+        {
+            <FluentIcon Value="@(new Icons.Regular.Size24.TimeAndWeather())" 
+                        Color="@Color.Neutral" />
+        }
+    </TemplateColumn>
+
+TAB: 06-Register page (inputs)
+
+- Register.razor
+
+@page "/register"
+
+<PageTitle>New user</PageTitle>
+
+<FluentLabel Typo="Typography.PageTitle">Register</FluentLabel>
+
+<FluentCard Style="margin: 16px 0px; padding: 16px; width: 600px; height: 500px;">
+
+    <FluentLabel Style="margin-bottom: 24px;">
+        Let's get you all set up so you can verify your personal account and begin
+        setting up your profile.
+    </FluentLabel>
+
+    <EditForm Model="@Data" OnValidSubmit="ValidHandlerAsync">
+        <FluentTextField Label="First name: *"
+                         Placeholder="Enter your first name"
+                         Required
+                         @bind-Value="@Data.FistName" />
+         <FluentTextField Label="Last name:"
+                          Placeholder="Enter your last name"
+                          @bind-Value="@Data.LastName" />
+         <FluentDatePicker Label="Birth date:"
+                           @bind-Value="@Data.BirthDate" />
+         <FluentTextField Label="EMail: *"
+                          TextFieldType="TextFieldType.Email"
+                          Required
+                          Placeholder="Enter your email"
+                          @bind-Value="@Data.Email" />
+
+         <FluentCheckbox Label="I agree to all terms, conditions, privacy policy."
+                         @bind-Value="@AcceptToCreate" />
+
+         <div style="margin: 24px 0px;" />
+
+         <FluentButton Appearance="Appearance.Accent"
+                       Loading="@Loading"
+                       Disabled="@(!AcceptToCreate)"
+                       Type="ButtonType.Submit">
+             Create account
+         </FluentButton>
+     </EditForm>
+ </FluentCard>
+
+ @code {
+    private RegisterUser Data = new();
+    private bool AcceptToCreate = false;
+    private bool Loading = false;
+
+    private async Task ValidHandlerAsync()
+    {
+        Loading = true;
+
+        // Simulate asynchronous loading
+        await Task.Delay(1000);
+
+        Loading = false;
+    }
+
+    public class RegisterUser
+    {
+        public string? LastName { get; set; }
+        public string? FistName { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string? Email { get; set; }
+    }
+}
+
+- MainLayout.razor - Left Navigation 
+
+<FluentNavLink Icon="@(new Icons.Regular.Size20.PlugConnectedSettings())"
+               Href="/Register">Register</FluentNavLink>
+
+- App.css: fluent-text-field
+
+fluent-text-field {
+    min-width: 100%;
+    margin-bottom: 16px;
+}
+
+- App.css: main-content 
+
+.main-content {
+    height: 100%;
+    width: 100%;
+    padding: 0px 16px;
+}
+
+TAB: 07-Autocomplete Country
+
+- Country.cs
+
+namespace DemoFluentUI.Components.Pages;
+
+using Microsoft.AspNetCore.Components;
+
+public record Country(string Code, string Name)
+{
+    public string Flag => $"https://fluentui-blazor.net/_content/FluentUI.Demo.Shared/flags/{Code}.svg";
+
+    public MarkupString HtmlFlagAndName => (MarkupString)
+        @$"<div style=""display: flex; gap: 10px;"">
+               <img src=""{Flag}"" width=""24"" />
+               <div>{Name}</div>
+           </div>";
+
+    public static IEnumerable<Country> All
+    {
+        get
+        {
+            // List generated using https://chat.openai.com/
+            return new Country[]
+            {
+                new Country("af", "Afghanistan"),
+                new Country("al", "Albania"),
+                new Country("dz", "Algeria"),
+                new Country("as", "American Samoa"),
+                new Country("ad", "Andorra"),
+                new Country("ao", "Angola"),
+                new Country("ai", "Anguilla"),
+                new Country("aq", "Antarctica"),
+                new Country("ag", "Antigua and Barbuda"),
+                new Country("ar", "Argentina"),
+                new Country("am", "Armenia"),
+                new Country("aw", "Aruba"),
+                new Country("au", "Australia"),
+                new Country("at", "Austria"),
+                new Country("az", "Azerbaijan"),
+                new Country("bs", "Bahamas"),
+                new Country("bh", "Bahrain"),
+                new Country("bd", "Bangladesh"),
+                new Country("bb", "Barbados"),
+                new Country("by", "Belarus"),
+                new Country("be", "Belgium"),
+                new Country("bz", "Belize"),
+                new Country("bj", "Benin"),
+                new Country("bm", "Bermuda"),
+                new Country("bt", "Bhutan"),
+                new Country("bo", "Bolivia"),
+                new Country("bq", "Bonaire, Sint Eustatius, and Saba"),
+                new Country("ba", "Bosnia and Herzegovina"),
+                new Country("bw", "Botswana"),
+                new Country("bv", "Bouvet Island"),
+                new Country("br", "Brazil"),
+                new Country("io", "British Indian Ocean Territory"),
+                new Country("vg", "British Virgin Islands"),
+                new Country("bn", "Brunei"),
+                new Country("bg", "Bulgaria"),
+                new Country("bf", "Burkina Faso"),
+                new Country("bi", "Burundi"),
+                new Country("cv", "Cabo Verde"),
+                new Country("kh", "Cambodia"),
+                new Country("cm", "Cameroon"),
+                new Country("ca", "Canada"),
+                new Country("ky", "Cayman Islands"),
+                new Country("cf", "Central African Republic"),
+                new Country("td", "Chad"),
+                new Country("cl", "Chile"),
+                new Country("cn", "China"),
+                new Country("cx", "Christmas Island"),
+                new Country("cc", "Cocos (Keeling) Islands"),
+                new Country("co", "Colombia"),
+                new Country("km", "Comoros"),
+                new Country("cd", "Congo (Congo-Kinshasa)"),
+                new Country("ck", "Cook Islands"),
+                new Country("cr", "Costa Rica"),
+                new Country("hr", "Croatia"),
+                new Country("cu", "Cuba"),
+                new Country("cw", "Curaçao"),
+                new Country("cy", "Cyprus"),
+                new Country("cz", "Czech Republic"),
+                new Country("ci", "Côte d'Ivoire"),
+                new Country("kp", "Democratic People's Republic of Korea (North Korea)"),
+                new Country("dk", "Denmark"),
+                new Country("dj", "Djibouti"),
+                new Country("dm", "Dominica"),
+                new Country("do", "Dominican Republic"),
+                new Country("ec", "Ecuador"),
+                new Country("eg", "Egypt"),
+                new Country("sv", "El Salvador"),
+                new Country("gq", "Equatorial Guinea"),
+                new Country("er", "Eritrea"),
+                new Country("ee", "Estonia"),
+                new Country("sz", "Eswatini"),
+                new Country("et", "Ethiopia"),
+                new Country("fk", "Falkland Islands (Malvinas)"),
+                new Country("fo", "Faroe Islands"),
+                new Country("fj", "Fiji"),
+                new Country("fi", "Finland"),
+                new Country("fr", "France"),
+                new Country("gf", "French Guiana"),
+                new Country("pf", "French Polynesia"),
+                new Country("tf", "French Southern Territories"),
+                new Country("ga", "Gabon"),
+                new Country("gm", "Gambia"),
+                new Country("ge", "Georgia"),
+                new Country("de", "Germany"),
+                new Country("gh", "Ghana"),
+                new Country("gi", "Gibraltar"),
+                new Country("gr", "Greece"),
+                new Country("gl", "Greenland"),
+                new Country("gd", "Grenada"),
+                new Country("gp", "Guadeloupe"),
+                new Country("gu", "Guam"),
+                new Country("gt", "Guatemala"),
+                new Country("gg", "Guernsey"),
+                new Country("gn", "Guinea"),
+                new Country("gw", "Guinea-Bissau"),
+                new Country("gy", "Guyana"),
+                new Country("ht", "Haiti"),
+                new Country("hm", "Heard Island and McDonald Islands"),
+                new Country("va", "Holy See"),
+                new Country("hn", "Honduras"),
+                new Country("hk", "Hong Kong"),
+                new Country("hu", "Hungary"),
+                new Country("is", "Iceland"),
+                new Country("in", "India"),
+                new Country("id", "Indonesia"),
+                new Country("ir", "Iran"),
+                new Country("iq", "Iraq"),
+                new Country("ie", "Ireland"),
+                new Country("im", "Isle of Man"),
+                new Country("il", "Israel"),
+                new Country("it", "Italy"),
+                new Country("jm", "Jamaica"),
+                new Country("jp", "Japan"),
+                new Country("je", "Jersey"),
+                new Country("jo", "Jordan"),
+                new Country("kz", "Kazakhstan"),
+                new Country("ke", "Kenya"),
+                new Country("ki", "Kiribati"),
+                new Country("kw", "Kuwait"),
+                new Country("kg", "Kyrgyzstan"),
+                new Country("la", "Lao People's Democratic Republic"),
+                new Country("lv", "Latvia"),
+                new Country("lb", "Lebanon"),
+                new Country("ls", "Lesotho"),
+                new Country("lr", "Liberia"),
+                new Country("ly", "Libya"),
+                new Country("li", "Liechtenstein"),
+                new Country("lt", "Lithuania"),
+                new Country("lu", "Luxembourg"),
+                new Country("mo", "Macao"),
+                new Country("mg", "Madagascar"),
+                new Country("mw", "Malawi"),
+                new Country("my", "Malaysia"),
+                new Country("mv", "Maldives"),
+                new Country("ml", "Mali"),
+                new Country("mt", "Malta"),
+                new Country("mh", "Marshall Islands"),
+                new Country("mq", "Martinique"),
+                new Country("mr", "Mauritania"),
+                new Country("mu", "Mauritius"),
+                new Country("yt", "Mayotte"),
+                new Country("mx", "Mexico"),
+                new Country("fm", "Micronesia"),
+                new Country("md", "Moldova"),
+                new Country("mc", "Monaco"),
+                new Country("mn", "Mongolia"),
+                new Country("me", "Montenegro"),
+                new Country("ms", "Montserrat"),
+                new Country("ma", "Morocco"),
+                new Country("mz", "Mozambique"),
+                new Country("mm", "Myanmar"),
+                new Country("na", "Namibia"),
+                new Country("nr", "Nauru"),
+                new Country("np", "Nepal"),
+                new Country("nl", "Netherlands"),
+                new Country("nc", "New Caledonia"),
+                new Country("nz", "New Zealand"),
+                new Country("ni", "Nicaragua"),
+                new Country("ne", "Niger"),
+                new Country("ng", "Nigeria"),
+                new Country("nu", "Niue"),
+                new Country("nf", "Norfolk Island"),
+                new Country("mp", "Northern Mariana Islands"),
+                new Country("no", "Norway"),
+                new Country("om", "Oman"),
+                new Country("pk", "Pakistan"),
+                new Country("ps", "Palestine"),
+                new Country("pa", "Panama"),
+                new Country("pg", "Papua New Guinea"),
+                new Country("py", "Paraguay"),
+                new Country("pe", "Peru"),
+                new Country("ph", "Philippines"),
+                new Country("pn", "Pitcairn"),
+                new Country("pl", "Poland"),
+                new Country("pt", "Portugal"),
+                new Country("pr", "Puerto Rico"),
+                new Country("qa", "Qatar"),
+                new Country("kr", "Republic of Korea (South Korea)"),
+                new Country("md", "Republic of Moldova"),
+                new Country("ro", "Romania"),
+                new Country("ru", "Russian Federation"),
+                new Country("rw", "Rwanda"),
+                new Country("re", "Réunion"),
+                new Country("bl", "Saint Barthélemy"),
+                new Country("sh", "Saint Helena"),
+                new Country("kn", "Saint Kitts and Nevis"),
+                new Country("lc", "Saint Lucia"),
+                new Country("mf", "Saint Martin"),
+                new Country("pm", "Saint Pierre and Miquelon"),
+                new Country("vc", "Saint Vincent and the Grenadines"),
+                new Country("ws", "Samoa"),
+                new Country("sm", "San Marino"),
+                new Country("st", "Sao Tome and Principe"),
+                new Country("sa", "Saudi Arabia"),
+                new Country("sn", "Senegal"),
+                new Country("rs", "Serbia"),
+                new Country("sc", "Seychelles"),
+                new Country("sl", "Sierra Leone"),
+                new Country("sg", "Singapore"),
+                new Country("sx", "Sint Maarten"),
+                new Country("sk", "Slovakia"),
+                new Country("si", "Slovenia"),
+                new Country("sb", "Solomon Islands"),
+                new Country("so", "Somalia"),
+                new Country("za", "South Africa"),
+                new Country("gs", "South Georgia and the South Sandwich Islands"),
+                new Country("ss", "South Sudan"),
+                new Country("es", "Spain"),
+                new Country("lk", "Sri Lanka"),
+                new Country("sd", "Sudan"),
+                new Country("sr", "Suriname"),
+                new Country("sj", "Svalbard and Jan Mayen"),
+                new Country("se", "Sweden"),
+                new Country("ch", "Switzerland"),
+                new Country("sy", "Syria"),
+                new Country("tw", "Taiwan"),
+                new Country("tj", "Tajikistan"),
+                new Country("th", "Thailand"),
+                new Country("mk", "The Former Yugoslav Republic of Macedonia"),
+                new Country("tl", "Timor-Leste"),
+                new Country("tg", "Togo"),
+                new Country("tk", "Tokelau"),
+                new Country("to", "Tonga"),
+                new Country("tt", "Trinidad and Tobago"),
+                new Country("tn", "Tunisia"),
+                new Country("tr", "Turkey"),
+                new Country("tm", "Turkmenistan"),
+                new Country("tc", "Turks and Caicos Islands"),
+                new Country("tv", "Tuvalu"),
+                new Country("ug", "Uganda"),
+                new Country("ua", "Ukraine"),
+                new Country("ae", "United Arab Emirates"),
+                new Country("gb", "United Kingdom"),
+                new Country("us", "United States of America"),
+                new Country("vi", "United States Virgin Islands"),
+                new Country("uy", "Uruguay"),
+                new Country("uz", "Uzbekistan"),
+                new Country("vu", "Vanuatu"),
+                new Country("ve", "Venezuela"),
+                new Country("vn", "Vietnam"),
+                new Country("wf", "Wallis and Futuna"),
+                new Country("eh", "Western Sahara"),
+                new Country("ye", "Yemen"),
+                new Country("zm", "Zambia"),
+                new Country("zw", "Zimbabwe"),
+            };
+        }
+    }
+}
+
+- Register.razor: FluentAutocomplete
+
+         @* Country *@
+         <FluentAutocomplete TOption="Country"
+                             Label="Select a country"
+                             Width="250px"
+                             Placeholder="Select countries"
+                             OnOptionsSearch="@OnSearchAsync"
+                             MaximumSelectedOptions="1"
+                             OptionText="@(i => i.Name)"
+                             @bind-SelectedOptions="@Data.Languages">
+
+            <OptionTemplate Context="language">
+                @language.HtmlFlagAndName
+            </OptionTemplate>
+
+            <MaximumSelectedOptionsMessage>
+                Please select only one country.
+            </MaximumSelectedOptionsMessage>
+         </FluentAutocomplete>
+
+- Register.razor: OnSearchAsync
+
+    private async Task OnSearchAsync(OptionsSearchEventArgs<Country> e)
+    {
+        e.Items = Country.All.Where(i => i.Name.StartsWith(e.Text, 
+                                                StringComparison.OrdinalIgnoreCase))
+                             .OrderBy(i => i.Name);
+
+        await Task.CompletedTask;
+    }
+
+- Register.razor: Languages property
+
+        public IEnumerable<Country> Languages { get; set; } = Array.Empty<Country>();
+
+TAB: 08-Themes
+
+- Home.razor: Injection
+
+@using Microsoft.FluentUI.AspNetCore.Components.DesignTokens
+@inject BaseLayerLuminance BaseLayerLuminance
+@inject AccentBaseColor AccentBaseColor
+
+- Home.razor: Components
+
+<FluentStack Orientation="Orientation.Vertical" Style="margin-top: 32px;">
+    <FluentLabel Typo="Typography.PageTitle">Settings</FluentLabel>
+
+    <FluentSelect Label="Color"
+                  Items=@(Enum.GetValues<OfficeColor>())
+                  Height="200px"
+                  @bind-SelectedOption="@Color" />
+
+    <FluentSwitch Label="Theme"
+                  Style="margin-top: 16px;"
+                  UncheckedMessage="Light"
+                  CheckedMessage="Dark"
+                  @bind-Value="@IsDark" />
+</FluentStack>
+
+@code {
+    private OfficeColor _color = OfficeColor.Default;
+    private bool _isDark = false;
+
+    public OfficeColor Color
+    {
+        get => _color;
+        set
+        {
+            _color = value;
+
+            var colorHex = _color.ToAttributeValue() ?? "default";
+            AccentBaseColor.WithDefault(colorHex.ToSwatch());
+        }
+    }
+
+    public bool IsDark
+    {
+        get => _isDark;
+        set
+        {
+            _isDark = value;
+
+            var luminance = _isDark
+                          ? StandardLuminance.DarkMode
+                          : StandardLuminance.LightMode;
+            BaseLayerLuminance.WithDefault(luminance.GetLuminanceValue());
+        }
+    }
+}
+
+- MainLayout.razor: FluentLayout
+
+<FluentLayout Style="background-color: var(--neutral-layer-1); color: var(--neutral-foreground-rest);">
+
+TAB: 09-Dialog
+
+- Register.razor: Button
+
+<FluentButton Appearance="Appearance.Accent"
+              Loading="@Loading"
+              IconStart="@(new Icons.Regular.Size20.PersonAdd())"
+              Disabled="@(!AcceptToCreate)"
+              Type="ButtonType.Submit">
+    Create account
+</FluentButton>
+
+- MainLayout.razor: Provider
+
+<FluentDialogProvider />
+
+- Register.razor: Inject
+
+@inject IDialogService DialogService
+
+- Register.razor: ShowInfoAsync
+
+    // Confirmation
+    await DialogService.ShowInfoAsync(
+                   message: "Your account has been successfully created",
+                   title: "New user");
+
+- AccountCreatedDialog.razor
+
+@implements IDialogContentComponent
+
+@* Header *@
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.PersonAdd())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            @Dialog.Instance.Parameters.Title
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+@* Footer *@
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Accent"
+                  OnClick="@SaveAsync">
+        Close
+    </FluentButton>
+</FluentDialogFooter>
+
+@* Body *@
+<FluentDialogBody>
+    <FluentLabel Typo="Typography.Subject" MarginBlock="10px;">
+        Thanks for being awesome!
+    </FluentLabel>
+    <FluentLabel>
+        Thank you for registering your new request.
+        If your request is urgent, please use our telephone number to speak to one
+        of our customer service representatives.
+        You can also reach us via <a href="https://dotnet.microsoft.com" 
+                                     target="_blank">our documentation page</a>.
+    </FluentLabel>
+</FluentDialogBody>
+
+@code {
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private async Task SaveAsync()
+    {
+        await Dialog.CloseAsync();
+    }
+}
+
+- Register.razor: ShowDialogAsync
+
+    // Confirmation
+    await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
+    {
+        Title = "New user",
+    });
+
+TAB: 10-Toast
+
+- MainLayout.razor: Provider
+
+@* <FluentToastContainer /> *@
+<FluentToastProvider />
+
+- App.css (optional)
+
+/* Fixed in FluentUI.Blazor V4 Preview 3 */
+.fluent-toast {
+    font-family: var(--body-font);
+}
+
+- Register.razor: Inject
+
+@inject IToastService ToastService
+
+- Register.razor: ShowSuccess
+
+    ToastService.ShowSuccess("Your account has been successfully created");
