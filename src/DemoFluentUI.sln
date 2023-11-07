@@ -5,6 +5,11 @@ VisualStudioVersion = 17.8.34219.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoFluentUI", "DemoFluentUI\DemoFluentUI.csproj", "{370ED669-7ADF-4B4F-8C48-0FB313F690A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{24A55099-D737-440E-ACE6-73D30EA17085}"
+	ProjectSection(SolutionItems) = preProject
+		dotnetconf.demosnippets = dotnetconf.demosnippets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
