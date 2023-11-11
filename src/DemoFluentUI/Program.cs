@@ -9,10 +9,7 @@ builder.Services.AddRazorComponents()
 
 // Add FluentUI
 builder.Services.AddHttpClient();
-builder.Services.AddFluentUIComponents(options =>
-{
-    options.HostingModel = BlazorHostingModel.Hybrid;
-});
+builder.Services.AddFluentUIComponents();
 
 var app = builder.Build();
 
