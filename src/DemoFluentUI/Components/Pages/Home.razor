@@ -33,7 +33,7 @@ Welcome to your new app.
         get => _color;
         set
         {
-            _color = value;
+            _color = value == OfficeColor.Default ? OfficeColor.Word : value;
 
             var colorHex = _color.ToAttributeValue() ?? "default";
             AccentBaseColor.WithDefault(colorHex.ToSwatch());
