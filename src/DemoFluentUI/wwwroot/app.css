@@ -51,8 +51,3 @@ fluent-text-field {
     min-width: 100%;
     margin-bottom: 16px;
 }
-
-/* Fixed in FluentUI.Blazor V4 Preview 3 */
-.fluent-toast {
-    font-family: var(--body-font);
-}
