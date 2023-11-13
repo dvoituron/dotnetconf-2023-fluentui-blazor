@@ -1,21 +1,18 @@
 ﻿@inherits LayoutComponentBase
 
-<FluentLayout>
-    @* Header *@
+@* <FluentLayout>
     <FluentHeader>
         .NET Conf 2023
     </FluentHeader>
 
     <FluentBodyContent>
         <FluentStack Orientation="Orientation.Horizontal" Style="height: 100%;">
-            @* Left Menu *@
             <FluentNavMenu Width="250" Title="Navigation menu">
                 <FluentNavLink Href="/" Match="NavLinkMatch.All">Home</FluentNavLink>
                 <FluentNavLink Href="/Counter">Counter</FluentNavLink>
                 <FluentNavLink Href="/Weather">Weather</FluentNavLink>
             </FluentNavMenu>
 
-            @* Content *@
             <div class="main-content">
                 @Body
             </div>
@@ -24,12 +21,11 @@
 
     </FluentBodyContent>
 
-    @* Footer *@
     <FluentFooter>
         Microsoft 2023
     </FluentFooter>
 
-</FluentLayout>
+</FluentLayout> *@
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

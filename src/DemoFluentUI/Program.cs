@@ -8,8 +8,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add FluentUI
-builder.Services.AddHttpClient();
-builder.Services.AddFluentUIComponents();
+//builder.Services.AddHttpClient();
+//builder.Services.AddFluentUIComponents();
 
 var app = builder.Build();
 
