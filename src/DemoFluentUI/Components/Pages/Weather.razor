@@ -16,7 +16,7 @@ else
         <PropertyColumn Title="Date" Property="@(c => c.Date.ToShortDateString())" Sortable="true" />
         <PropertyColumn Title="Temp. (C)" Property="@(c => c.TemperatureC)" Sortable="true" />
         <PropertyColumn Title="Temp. (F)" Property="@(c => c.TemperatureF)" Sortable="true" />
-        <TemplateColumn Title="Icon">
+@*      <TemplateColumn Title="Icon">
             @if (context.TemperatureC > 21)
             {
                 <FluentIcon Value="@(new Icons.Regular.Size24.WeatherHailNight())" Color="@Color.Neutral" />
@@ -26,6 +26,7 @@ else
                 <FluentIcon Value="@(new Icons.Regular.Size24.TimeAndWeather())" Color="@Color.Neutral" />
             }
         </TemplateColumn>
+*@
         <PropertyColumn Title="Summary" Property="@(c => c.Summary)" Sortable="true" />
     </FluentDataGrid>
 }
