@@ -87,10 +87,10 @@
 
     public class RegisterUser
     {
-        public string? LastName { get; set; }
-        public string? FistName { get; set; }
+        public string? LastName { get; set; } = "John";
+        public string? FistName { get; set; } = "Smith";
         public DateTime? BirthDate { get; set; }
-        public string? Email { get; set; }
+        public string? Email { get; set; } = "john@mycompany.com";
         public IEnumerable<Country> Languages { get; set; } = Array.Empty<Country>();
     }
 }
