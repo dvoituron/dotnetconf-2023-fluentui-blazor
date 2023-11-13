@@ -1,5 +1,5 @@
 ﻿@page "/register"
-@inject IDialogService DialogService
+@* @inject IDialogService DialogService *@
 
 <PageTitle>New user</PageTitle>
 
@@ -80,10 +80,10 @@
         // await DialogService.ShowInfoAsync(message: "Your account has been successfully created",
         //                                   title: "New user");
 
-        await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
-        {
-            Title = "New user",
-        });
+        // await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
+        // {
+        //     Title = "New user",
+        // });
 
         Loading = false;
     }
