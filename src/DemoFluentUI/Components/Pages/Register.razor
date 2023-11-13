@@ -21,8 +21,7 @@
                           @bind-Value="@Data.LastName" />
          <FluentDatePicker Label="Birth date:"
                            @bind-Value="@Data.BirthDate" />
-
-         @* Country *@
+@* 
          <FluentAutocomplete TOption="Country"
                              Label="Select a country"
                              Width="250px"
@@ -41,7 +40,7 @@
             </MaximumSelectedOptionsMessage>
 
          </FluentAutocomplete>
-
+ *@
          <FluentTextField Label="EMail: *"
                           TextFieldType="TextFieldType.Email"
                           Required
@@ -77,13 +76,13 @@
         Loading = false;
     }
 
-    private async Task OnSearchAsync(OptionsSearchEventArgs<Country> e)
-    {
-        e.Items = Country.All.Where(i => i.Name.StartsWith(e.Text, StringComparison.OrdinalIgnoreCase))
-                              .OrderBy(i => i.Name);
+    // private async Task OnSearchAsync(OptionsSearchEventArgs<Country> e)
+    // {
+    //     e.Items = Country.All.Where(i => i.Name.StartsWith(e.Text, StringComparison.OrdinalIgnoreCase))
+    //                           .OrderBy(i => i.Name);
 
-        await Task.CompletedTask;
-    }
+    //     await Task.CompletedTask;
+    // }
 
     public class RegisterUser
     {
@@ -91,6 +90,6 @@
         public string? FistName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Email { get; set; }
-        public IEnumerable<Country> Languages { get; set; } = Array.Empty<Country>();
+        // public IEnumerable<Country> Languages { get; set; } = Array.Empty<Country>();
     }
 }
