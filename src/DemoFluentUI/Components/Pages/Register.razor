@@ -12,16 +12,16 @@
     </FluentLabel>
 
     <EditForm Model="@Data" OnValidSubmit="ValidHandlerAsync">
-        <FluentTextField Label="First name: *"
+        <FluentTextField Label="First name"
                          Placeholder="Enter your first name"
                          Required
                          @bind-Value="@Data.FistName" />
-         <FluentTextField Label="Last name:"
+         <FluentTextField Label="Last name"
                           Placeholder="Enter your last name"
                           @bind-Value="@Data.LastName" />
-         <FluentDatePicker Label="Birth date:"
+         <FluentDatePicker Label="Birth date"
                            @bind-Value="@Data.BirthDate" />
-         <FluentTextField Label="EMail: *"
+         <FluentTextField Label="Email"
                           TextFieldType="TextFieldType.Email"
                           Required
                           Placeholder="Enter your email"
