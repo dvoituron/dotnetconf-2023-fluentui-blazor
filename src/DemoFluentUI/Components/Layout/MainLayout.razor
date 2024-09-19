@@ -1,9 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Runtime.InteropServices
+@inherits LayoutComponentBase
 
 <FluentLayout>
     @* Header *@
     <FluentHeader>
-        .NET Conf 2023
+        Unlocking the power of the Fluent UI Blazor library
     </FluentHeader>
 
     <FluentBodyContent>
@@ -26,7 +27,9 @@
 
     @* Footer *@
     <FluentFooter>
-        Microsoft 2023
+        &nbsp;&nbsp;&copy; Microsoft 2024
+        <FluentSpacer />
+        Powered by @RuntimeInformation.FrameworkDescription&nbsp;&nbsp;
     </FluentFooter>
 
 </FluentLayout>
