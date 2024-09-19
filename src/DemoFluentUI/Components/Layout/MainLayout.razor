@@ -1,9 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Runtime.InteropServices
+@inherits LayoutComponentBase
 
 <FluentLayout Style="background-color: var(--neutral-layer-1); color: var(--neutral-foreground-rest);">
     @* Header *@
     <FluentHeader>
-        .NET Conf 2023
+        Unlocking the power of the Fluent UI Blazor library
     </FluentHeader>
 
     <FluentBodyContent>
@@ -27,13 +28,16 @@
 
     @* Footer *@
     <FluentFooter>
-        Microsoft 2023
+        &nbsp;&nbsp;&copy; Microsoft 2024
+        <FluentSpacer   />
+        Powered by @RuntimeInformation.FrameworkDescription&nbsp;&nbsp;
     </FluentFooter>
 
 </FluentLayout>
 
 <FluentDialogProvider />
-@* <FluentToastProvider /> *@
+<FluentToastProvider />
+<FluentMenuProvider />
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

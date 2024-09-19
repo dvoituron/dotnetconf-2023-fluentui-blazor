@@ -1,6 +1,6 @@
 ﻿@page "/register"
 @inject IDialogService DialogService
-@* @inject IToastService ToastService *@
+@inject IToastService ToastService
 
 <PageTitle>New user</PageTitle>
 
@@ -14,14 +14,14 @@
     </FluentLabel>
 
     <EditForm Model="@Data" OnValidSubmit="ValidHandlerAsync">
-        <FluentTextField Label="First name: *"
+        <FluentTextField Label="First name"
                          Placeholder="Enter your first name"
                          Required
                          @bind-Value="@Data.FistName" />
-         <FluentTextField Label="Last name:"
+         <FluentTextField Label="Last name"
                           Placeholder="Enter your last name"
                           @bind-Value="@Data.LastName" />
-         <FluentDatePicker Label="Birth date:"
+         <FluentDatePicker Label="Birth date"
                            @bind-Value="@Data.BirthDate" />
 
          @* Country *@
@@ -44,7 +44,7 @@
 
          </FluentAutocomplete>
 
-         <FluentTextField Label="EMail: *"
+         <FluentTextField Label="EMail"
                           TextFieldType="TextFieldType.Email"
                           Required
                           Placeholder="Enter your email"
@@ -78,12 +78,12 @@
         await Task.Delay(1000);
 
         // Confirmation
-        await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
-        {
-            Title = "New user",
-        });
+        // await DialogService.ShowDialogAsync<AccountCreatedDialog>(new DialogParameters()
+        // {
+        //     Title = "New user",
+        // });
 
-        // ToastService.ShowSuccess("Your account has been successfully created");
+        ToastService.ShowSuccess("Your account has been successfully created");
 
         Loading = false;
     }

@@ -4,12 +4,16 @@
 
 <FluentLabel Typo="Typography.PageTitle">Counter</FluentLabel>
 
-<FluentLabel role="status">Current count: @currentCount</FluentLabel>
+<FluentCard MinimalStyle="true" Width="400px" Height="400px">
+    <FluentStack VerticalGap="10" Orientation="Orientation.Vertical">
+        <FluentLabel role="status">Current count: @currentCount</FluentLabel>
 
-<FluentButton Appearance="Appearance.Accent"
-              OnClick="IncrementCount">
-    Click me
-</FluentButton>
+        <FluentButton Appearance="Appearance.Accent"
+                      OnClick="IncrementCount">
+            Click me
+        </FluentButton>
+    </FluentStack>
+</FluentCard>
 
 @code {
     private int currentCount = 0;

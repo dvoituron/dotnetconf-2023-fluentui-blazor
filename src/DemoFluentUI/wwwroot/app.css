@@ -1,3 +1,5 @@
+@import '/_content/Microsoft.FluentUI.AspNetCore.Components/css/reboot.css';
+
 h1:focus {
     outline: none;
 }
@@ -50,4 +52,8 @@ body {
 fluent-text-field {
     min-width: 100%;
     margin-bottom: 16px;
+}
+
+h2.fluent-typography {
+    padding-bottom: 1rem;
 }
